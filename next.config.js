@@ -2,6 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  webpack: (config, { dev, isServer }) => {
+    // Disable webpack caching in development to prevent ENOENT errors
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
+  },
 };
 
 if (process.env.NEXT_PUBLIC_TEMPO) {

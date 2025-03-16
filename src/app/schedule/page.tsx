@@ -1,15 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import BottomNavigation from "@/components/common/BottomNavigation";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useRouter } from "next/navigation";
 
 const ScheduleScreen = () => {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [showMatchingOptions, setShowMatchingOptions] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gray-50">
+    <div className="flex flex-col min-h-screen w-full bg-gray-50 relative">
       {/* 헤더 */}
       <header className="sticky top-0 z-10 bg-white shadow-sm w-full">
         <div className="w-full px-4 py-3">
@@ -17,10 +20,102 @@ const ScheduleScreen = () => {
             <h1 className="text-xl font-bold text-gray-800">
               {t("schedule.title") || "My Schedule"}
             </h1>
-            <div></div>
+            <button
+              className="flex items-center justify-center px-3 py-1.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+              onClick={() => setShowMatchingOptions(!showMatchingOptions)}
+            >
+              <svg
+                className="w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                ></path>
+              </svg>
+              {t("schedule.addNew") || "Add"}
+            </button>
           </div>
         </div>
       </header>
+
+      {/* 매칭 옵션 드롭다운 */}
+      {showMatchingOptions && (
+        <div className="absolute right-4 top-16 z-20 bg-white rounded-lg shadow-lg border border-gray-200 w-64 py-2 animate-fadeIn">
+          <Link
+            href="/match/online"
+            className="flex items-center px-4 py-3 hover:bg-purple-50 transition-colors duration-200"
+          >
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+              <svg
+                className="w-4 h-4 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800">
+                {t("schedule.onlineMatching") || "Online Matching"}
+              </h3>
+              <p className="text-xs text-gray-500">
+                {t("schedule.onlineDescription") ||
+                  "Learn Korean with a teacher online"}
+              </p>
+            </div>
+          </Link>
+          <div className="border-t border-gray-100 my-1"></div>
+          <Link
+            href="/match/offline"
+            className="flex items-center px-4 py-3 hover:bg-purple-50 transition-colors duration-200"
+          >
+            <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+              <svg
+                className="w-4 h-4 text-orange-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800">
+                {t("schedule.offlineMatching") || "Offline Companion"}
+              </h3>
+              <p className="text-xs text-gray-500">
+                {t("schedule.offlineDescription") ||
+                  "Practice Korean with a local guide"}
+              </p>
+            </div>
+          </Link>
+        </div>
+      )}
 
       {/* 뷰 선택 탭 */}
       <div className="bg-white border-b border-gray-200 w-full">

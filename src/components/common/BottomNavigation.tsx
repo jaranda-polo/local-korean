@@ -40,8 +40,8 @@ const BottomNavigation: React.FC = () => {
             <span className="text-xs mt-1">{t("nav.home")}</span>
           </Link>
           <Link
-            href="/search"
-            className={`py-3 flex flex-col items-center justify-center w-1/5 ${isActive("/search") ? "text-purple-600" : "text-gray-500"}`}
+            href="/discover"
+            className={`py-3 flex flex-col items-center justify-center w-1/5 ${isActive("/discover") ? "text-purple-600" : "text-gray-500"}`}
           >
             <svg
               className="w-6 h-6"
@@ -54,10 +54,10 @@ const BottomNavigation: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
               ></path>
             </svg>
-            <span className="text-xs mt-1">{t("nav.search")}</span>
+            <span className="text-xs mt-1">{t("nav.discover")}</span>
           </Link>
           <Link
             href="/schedule"

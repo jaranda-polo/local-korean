@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50` + " flex h-[1295]"}>
+      <body className={`${inter.className} bg-gray-50 flex min-h-screen`}>
         <Script src="https://api.tempolabs.ai/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js" />
         <TempoInit />
         <LanguageProvider>{children}</LanguageProvider>
