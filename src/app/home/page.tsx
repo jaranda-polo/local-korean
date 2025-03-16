@@ -1,43 +1,92 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import BottomNavigation from "@/components/common/BottomNavigation";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HomePage = () => {
+  const { t } = useLanguage();
+  const [languageOpen, setLanguageOpen] = useState(false);
+
+  // LanguageSelector 컴포넌트
+  const LanguageSelector = ({ onSelect }) => {
+    const { language, changeLanguage } = useLanguage();
+
+    const languages = [
+      { code: "en", name: "English" },
+      { code: "ko", name: "한국어" },
+      { code: "ja", name: "日本語" },
+    ];
+
+    const handleLanguageChange = (langCode) => {
+      changeLanguage(langCode);
+      if (onSelect) onSelect();
+    };
+
+    return (
+      <div className="py-1">
+        {languages.map((lang) => (
+          <button
+            key={lang.code}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              language === lang.code
+                ? "bg-purple-50 text-purple-600 font-medium"
+                : "text-gray-700 hover:bg-gray-50"
+            }`}
+            onClick={() => handleLanguageChange(lang.code)}
+          >
+            {lang.name}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-purple-50 to-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-purple-50 to-white max-w-[390px] mx-auto">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-sm">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-sm w-full">
+        <div className="px-3 py-3 flex items-center justify-between">
           <div className="flex items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">
+            <div className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">
               LocalKorean
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <button
-              className="p-2 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200"
-              onClick={() => window.open("/", "_blank")}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="flex items-center space-x-3">
+            {/* 언어 선택 드롭다운 */}
+            <div className="relative">
+              <button
+                className="p-1.5 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200 flex items-center"
+                onClick={() => setLanguageOpen(!languageOpen)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                ></path>
-              </svg>
-            </button>
-            <button className="p-2 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                  ></path>
+                </svg>
+              </button>
+
+              {languageOpen && (
+                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg overflow-hidden z-20">
+                  <LanguageSelector onSelect={() => setLanguageOpen(false)} />
+                </div>
+              )}
+            </div>
+
+            {/* 알림 버튼 */}
+            <button className="p-1.5 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200">
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -51,7 +100,9 @@ const HomePage = () => {
                 ></path>
               </svg>
             </button>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md">
+
+            {/* 사용자 프로필 */}
+            <div className="w-7 h-7 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md text-xs">
               JD
             </div>
           </div>
@@ -59,21 +110,23 @@ const HomePage = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="flex-grow px-4 py-6">
         {/* Welcome Message */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Hello, John!</h1>
-          <p className="text-gray-600">What would you like to learn today?</p>
+          <h1 className="text-2xl font-bold text-gray-800">
+            {t("home.greeting")}, John!
+          </h1>
+          <p className="text-gray-600">{t("home.learn.question")}</p>
         </div>
 
         {/* Upcoming Classes */}
         <div className="bg-white rounded-xl shadow-sm p-5 mb-8 border border-purple-100">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800">
-              Upcoming Classes
+              {t("home.upcoming")}
             </h2>
             <button className="text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text hover:opacity-80 transition-opacity">
-              View All
+              {t("home.viewAll")}
             </button>
           </div>
 
@@ -81,22 +134,24 @@ const HomePage = () => {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center mr-3 shadow-sm">
-                  <span className="text-purple-700 font-medium">Today</span>
+                  <span className="text-purple-700 font-medium text-xs">
+                    {t("schedule.today")}
+                  </span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-800">
-                    Finding an Apartment in Seoul
+                  <h3 className="font-medium text-gray-800 text-sm">
+                    {t("home.findingApartment")}
                   </h3>
-                  <p className="text-sm text-gray-600">
-                    With Minji Kim • 16:00 (30 min left)
+                  <p className="text-xs text-gray-600">
+                    {t("home.with")} Minji Kim • 16:00 (30 {t("home.timeLeft")})
                   </p>
                 </div>
               </div>
               <Link
                 href="/class"
-                className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-xs font-medium shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                Join Now
+                {t("home.joinNow")}
               </Link>
             </div>
           </div>
@@ -105,19 +160,21 @@ const HomePage = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                  <span className="text-gray-700 font-medium">Tomorrow</span>
+                  <span className="text-gray-700 font-medium text-xs">
+                    {t("schedule.tomorrow")}
+                  </span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-800">
-                    Ordering at a Cafe
+                  <h3 className="font-medium text-gray-800 text-sm">
+                    {t("home.orderingCafe")}
                   </h3>
-                  <p className="text-sm text-gray-600">
-                    With Junho Park • 14:30
+                  <p className="text-xs text-gray-600">
+                    {t("home.with")} Junho Park • 14:30
                   </p>
                 </div>
               </div>
-              <button className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
-                Details
+              <button className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors duration-200">
+                {t("home.details")}
               </button>
             </div>
           </div>
@@ -127,10 +184,10 @@ const HomePage = () => {
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Link
             href="/match/online"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center hover:shadow-md transition-shadow duration-200"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm p-4 text-center flex flex-col items-center justify-center hover:shadow-md transition-shadow duration-200"
           >
             <svg
-              className="w-8 h-8 mb-2"
+              className="w-6 h-6 mb-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -143,14 +200,14 @@ const HomePage = () => {
                 d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
               ></path>
             </svg>
-            <span className="font-medium">Start Online Learning</span>
+            <span className="font-medium text-sm">{t("home.startOnline")}</span>
           </Link>
           <Link
             href="/match/offline"
-            className="bg-white border-2 border-purple-200 text-purple-600 rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center hover:border-purple-300 hover:shadow-md transition-all duration-200"
+            className="bg-white border-2 border-purple-200 text-purple-600 rounded-xl shadow-sm p-4 text-center flex flex-col items-center justify-center hover:border-purple-300 hover:shadow-md transition-all duration-200"
           >
             <svg
-              className="w-8 h-8 mb-2"
+              className="w-6 h-6 mb-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -169,7 +226,9 @@ const HomePage = () => {
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               ></path>
             </svg>
-            <span className="font-medium">Request In-Person Guide</span>
+            <span className="font-medium text-sm">
+              {t("home.requestGuide")}
+            </span>
           </Link>
         </div>
 
@@ -177,40 +236,38 @@ const HomePage = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800">
-              Recommended for You
+              {t("home.recommended")}
             </h2>
             <button className="text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text hover:opacity-80 transition-opacity">
-              View All
+              {t("home.viewAll")}
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-purple-100 hover:shadow-md transition-shadow duration-200">
-              <div className="h-32 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
+              <div className="h-24 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
                 <span className="text-purple-700 font-medium">
-                  K-pop Vocabulary
+                  {t("home.kpopVocab")}
                 </span>
               </div>
               <div className="p-4">
-                <h3 className="font-medium text-gray-800 mb-1">
-                  Learn K-pop Terminology
+                <h3 className="font-medium text-gray-800 mb-1 text-sm">
+                  {t("home.learnKpop")}
                 </h3>
-                <p className="text-sm text-gray-600">
-                  Essential words for K-pop fans
-                </p>
+                <p className="text-xs text-gray-600">{t("home.kpopWords")}</p>
               </div>
             </div>
             <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-purple-100 hover:shadow-md transition-shadow duration-200">
-              <div className="h-32 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
+              <div className="h-24 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
                 <span className="text-purple-700 font-medium">
-                  Daily Conversations
+                  {t("home.dailyConvo")}
                 </span>
               </div>
               <div className="p-4">
-                <h3 className="font-medium text-gray-800 mb-1">
-                  Everyday Korean Phrases
+                <h3 className="font-medium text-gray-800 mb-1 text-sm">
+                  {t("home.everydayPhrases")}
                 </h3>
-                <p className="text-sm text-gray-600">
-                  Useful expressions for daily life
+                <p className="text-xs text-gray-600">
+                  {t("home.usefulExpressions")}
                 </p>
               </div>
             </div>

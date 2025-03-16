@@ -3,13 +3,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { TempoInit } from "./tempo-init";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "로컬한국어 - 현지 원어민과 실용적인 한국어 학습",
+  title: "LocalKorean - Practical Korean Learning with Native Speakers",
   description:
-    "한국 현지 생활과 여행에 필요한 실용적인 한국어를 배우는 온/오프라인 플랫폼",
+    "An online/offline platform for learning practical Korean for living and traveling in Korea",
 };
 
 export default function RootLayout({
@@ -18,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body className={`${inter.className} bg-gray-50`}>
+    <html lang="en">
+      <body className={`${inter.className} bg-gray-50` + " flex h-[1295]"}>
         <Script src="https://api.tempolabs.ai/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js" />
         <TempoInit />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

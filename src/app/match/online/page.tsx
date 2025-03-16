@@ -659,6 +659,7 @@ const OnlineMatchingScreen = () => {
               온라인 학습 매칭
             </div>
           </div>
+          <div></div>
         </div>
       </header>
 

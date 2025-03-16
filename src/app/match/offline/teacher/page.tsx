@@ -3,9 +3,11 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TeacherSelectionScreen = () => {
   const router = useRouter();
+  const { t } = useLanguage();
 
   const handleBackClick = () => {
     router.back();
@@ -13,7 +15,7 @@ const TeacherSelectionScreen = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* 헤더 */}
+      {/* Header */}
       <header className="sticky top-0 z-10 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center">
@@ -34,115 +36,23 @@ const TeacherSelectionScreen = () => {
               </svg>
             </button>
             <div className="text-xl font-bold text-gray-800">
-              오프라인 동행 선생님
+              {t("teacher.title")}
             </div>
           </div>
-          <div className="flex space-x-2">
-            <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                ></path>
-              </svg>
-            </button>
-          </div>
+          <div></div>
         </div>
       </header>
 
-      {/* 검색 필터 */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="지역, 전문 분야, 키워드로 검색"
-              className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-            />
-            <svg
-              className="w-5 h-5 text-gray-400 absolute left-3 top-2.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      {/* 필터 선택 */}
-      <div className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex space-x-2 overflow-x-auto pb-1 hide-scrollbar">
-            <button className="px-3 py-1.5 bg-teal-600 text-white rounded-full text-sm whitespace-nowrap">
-              모든 지역
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              서울
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              부산
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              제주
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              기타 지역
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex space-x-2 overflow-x-auto pb-1 hide-scrollbar">
-            <button className="px-3 py-1.5 bg-teal-600 text-white rounded-full text-sm whitespace-nowrap">
-              모든 분야
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              병원
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              부동산
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              맛집
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              교통
-            </button>
-            <button className="px-3 py-1.5 bg-white border border-gray-300 text-gray-700 rounded-full text-sm whitespace-nowrap">
-              관광
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* 메인 콘텐츠 */}
+      {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          오프라인 동행 가능한 선생님
+          {t("teacher.availableTeachers")}
         </h2>
 
-        {/* 선생님 목록 */}
+        {/* Teacher List */}
         <div className="space-y-4">
-          {/* 선생님 1 */}
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Teacher 1 */}
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
             <div className="p-4">
               <div className="flex">
                 <div className="w-20 h-20 rounded-full bg-gray-300 mr-4 flex-shrink-0"></div>
@@ -172,17 +82,17 @@ const TeacherSelectionScreen = () => {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2 mb-2">
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
-                      병원
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.hospital")}
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
-                      교통
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.transportation")}
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
-                      관광
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.tourism")}
                     </span>
-                    <span className="bg-teal-100 text-teal-700 text-xs py-1 px-2 rounded">
-                      영어 가능
+                    <span className="bg-pink-100 text-pink-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.englishAvailable")}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-2">
@@ -194,19 +104,21 @@ const TeacherSelectionScreen = () => {
               <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between items-center">
                 <div className="text-sm">
                   <span className="text-gray-700 font-medium">
-                    40,000원/시간
+                    40,000원{t("teacher.hourly")}
                   </span>
-                  <span className="text-gray-500 ml-2">3일 내 가능</span>
+                  <span className="text-gray-500 ml-2">
+                    {t("teacher.availableIn3Days")}
+                  </span>
                 </div>
-                <button className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium">
-                  선택하기
+                <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-sm font-medium hover:shadow-md transition-shadow duration-200">
+                  {t("teacher.select")}
                 </button>
               </div>
             </div>
           </div>
 
-          {/* 선생님 2 */}
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Teacher 2 */}
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
             <div className="p-4">
               <div className="flex">
                 <div className="w-20 h-20 rounded-full bg-gray-300 mr-4 flex-shrink-0"></div>
@@ -236,17 +148,17 @@ const TeacherSelectionScreen = () => {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2 mb-2">
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
-                      부동산
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.realEstate")}
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
                       휴대폰
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
                       쇼핑
                     </span>
-                    <span className="bg-teal-100 text-teal-700 text-xs py-1 px-2 rounded">
-                      영어 가능
+                    <span className="bg-pink-100 text-pink-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.englishAvailable")}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-2">
@@ -258,22 +170,24 @@ const TeacherSelectionScreen = () => {
               <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between items-center">
                 <div className="text-sm">
                   <span className="text-gray-700 font-medium">
-                    45,000원/시간
+                    45,000원{t("teacher.hourly")}
                   </span>
-                  <span className="text-gray-500 ml-2">오늘 가능</span>
+                  <span className="text-gray-500 ml-2">
+                    {t("teacher.availableToday")}
+                  </span>
                 </div>
                 <Link
                   href="/match/offline/teacher/request"
-                  className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-sm font-medium hover:shadow-md transition-shadow duration-200"
                 >
-                  선택하기
+                  {t("teacher.select")}
                 </Link>
               </div>
             </div>
           </div>
 
-          {/* 선생님 3 */}
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Teacher 3 */}
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
             <div className="p-4">
               <div className="flex">
                 <div className="w-20 h-20 rounded-full bg-gray-300 mr-4 flex-shrink-0"></div>
@@ -303,17 +217,17 @@ const TeacherSelectionScreen = () => {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2 mb-2">
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
-                      맛집
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.restaurants")}
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
                       카페
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs py-1 px-2 rounded">
+                    <span className="bg-purple-100 text-purple-700 text-xs py-1 px-2 rounded">
                       문화
                     </span>
-                    <span className="bg-teal-100 text-teal-700 text-xs py-1 px-2 rounded">
-                      중국어 가능
+                    <span className="bg-pink-100 text-pink-700 text-xs py-1 px-2 rounded">
+                      {t("teacher.chineseAvailable")}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-2">
@@ -326,12 +240,14 @@ const TeacherSelectionScreen = () => {
               <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between items-center">
                 <div className="text-sm">
                   <span className="text-gray-700 font-medium">
-                    35,000원/시간
+                    35,000원{t("teacher.hourly")}
                   </span>
-                  <span className="text-gray-500 ml-2">내일 가능</span>
+                  <span className="text-gray-500 ml-2">
+                    {t("teacher.availableTomorrow")}
+                  </span>
                 </div>
-                <button className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium">
-                  선택하기
+                <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-sm font-medium hover:shadow-md transition-shadow duration-200">
+                  {t("teacher.select")}
                 </button>
               </div>
             </div>
@@ -339,9 +255,9 @@ const TeacherSelectionScreen = () => {
         </div>
       </main>
 
-      {/* 하단 필터 버튼 */}
+      {/* Bottom Filter Buttons */}
       <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex justify-between">
-        <button className="w-1/2 py-3 mr-2 border border-teal-600 text-teal-600 rounded-lg font-medium flex items-center justify-center">
+        <button className="w-1/2 py-3 mr-2 border border-purple-600 text-purple-600 rounded-lg font-medium flex items-center justify-center hover:bg-purple-50 transition-colors duration-200">
           <svg
             className="w-5 h-5 mr-1"
             fill="none"
@@ -356,9 +272,9 @@ const TeacherSelectionScreen = () => {
               d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
             ></path>
           </svg>
-          필터
+          {t("teacher.filter")}
         </button>
-        <button className="w-1/2 py-3 ml-2 bg-gray-800 text-white rounded-lg font-medium flex items-center justify-center">
+        <button className="w-1/2 py-3 ml-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium flex items-center justify-center hover:shadow-md transition-shadow duration-200">
           <svg
             className="w-5 h-5 mr-1"
             fill="none"
@@ -373,7 +289,7 @@ const TeacherSelectionScreen = () => {
               d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
             ></path>
           </svg>
-          정렬
+          {t("teacher.sort")}
         </button>
       </div>
     </div>
