@@ -690,17 +690,9 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [language, setLanguage] = useState<Language>("en");
 
-  // Load language preference from localStorage on component mount
+  // Always use English as default language
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language") as Language | null;
-    if (
-      savedLanguage &&
-      (savedLanguage === "en" ||
-        savedLanguage === "ko" ||
-        savedLanguage === "ja")
-    ) {
-      setLanguage(savedLanguage);
-    }
+    setLanguage("en");
   }, []);
 
   // Save language preference to localStorage when it changes

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // 선생님 데이터 (실제 구현에서는 API로 가져올 것)
 const teachers = [
@@ -101,9 +102,10 @@ const contents = [
   },
 ];
 
-// 온라인 매칭 메인 컴포넌트
+// Online Matching Main Component
 const OnlineMatchingScreen = () => {
   const router = useRouter();
+  const { t } = useLanguage();
 
   // 상태 관리
   const [step, setStep] = useState(1); // 1: 학습 유형 선택, 2: 경로 선택, 3A: 선생님 선택, 3B: 콘텐츠 선택, 4: 일정 선택
@@ -173,16 +175,16 @@ const OnlineMatchingScreen = () => {
   const renderLearningTypeStep = () => (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold text-gray-800 mb-6">
-        학습 유형을 선택하세요
+        {t("online.selectLearningType") || "Select a learning type"}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <button
-          className={`p-6 rounded-xl border-2 ${learningType === "freetalk" ? "border-teal-600 bg-teal-50" : "border-gray-200"} hover:border-teal-600 hover:bg-teal-50 transition duration-200`}
+          className={`p-6 rounded-xl border-2 ${learningType === "freetalk" ? "border-purple-600 bg-purple-50" : "border-gray-200"} hover:border-purple-600 hover:bg-purple-50 transition duration-200`}
           onClick={() => setLearningType("freetalk")}
         >
-          <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg
-              className="w-6 h-6 text-teal-600"
+              className="w-6 h-6 text-purple-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -197,21 +199,21 @@ const OnlineMatchingScreen = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-800 text-center mb-2">
-            프리토킹
+            {t("online.freeTalking") || "Free Talking"}
           </h3>
           <p className="text-gray-600 text-sm text-center">
-            자유로운 주제로 대화하며 회화 실력을 향상시킵니다. 일상 대화에
-            자신감을 키우는데 좋습니다.
+            {t("online.freeTalkingDesc") ||
+              "Improve your conversation skills by talking about free topics. Great for building confidence in everyday conversations."}
           </p>
         </button>
 
         <button
-          className={`p-6 rounded-xl border-2 ${learningType === "content" ? "border-teal-600 bg-teal-50" : "border-gray-200"} hover:border-teal-600 hover:bg-teal-50 transition duration-200`}
+          className={`p-6 rounded-xl border-2 ${learningType === "content" ? "border-purple-600 bg-purple-50" : "border-gray-200"} hover:border-purple-600 hover:bg-purple-50 transition duration-200`}
           onClick={() => setLearningType("content")}
         >
-          <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg
-              className="w-6 h-6 text-teal-600"
+              className="w-6 h-6 text-purple-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -226,21 +228,21 @@ const OnlineMatchingScreen = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-800 text-center mb-2">
-            콘텐츠로 대화하기
+            {t("online.contentBased") || "Content-Based Conversation"}
           </h3>
           <p className="text-gray-600 text-sm text-center">
-            특정 주제나 상황(음식점, 병원, 쇼핑 등)에 맞는 표현과 어휘를
-            배웁니다.
+            {t("online.contentBasedDesc") ||
+              "Learn expressions and vocabulary for specific situations (restaurants, hospitals, shopping, etc.)."}
           </p>
         </button>
 
         <button
-          className={`p-6 rounded-xl border-2 ${learningType === "official" ? "border-teal-600 bg-teal-50" : "border-gray-200"} hover:border-teal-600 hover:bg-teal-50 transition duration-200`}
+          className={`p-6 rounded-xl border-2 ${learningType === "official" ? "border-purple-600 bg-purple-50" : "border-gray-200"} hover:border-purple-600 hover:bg-purple-50 transition duration-200`}
           onClick={() => setLearningType("official")}
         >
-          <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg
-              className="w-6 h-6 text-teal-600"
+              className="w-6 h-6 text-purple-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -255,22 +257,22 @@ const OnlineMatchingScreen = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-800 text-center mb-2">
-            공인학습레벨
+            {t("online.officialLearning") || "Official Learning Level"}
           </h3>
           <p className="text-gray-600 text-sm text-center">
-            TOPIK 등 공식 시험 준비나 체계적인 한국어 학습을 원하는 분들을 위한
-            옵션입니다.
+            {t("online.officialLearningDesc") ||
+              "For those preparing for official tests like TOPIK or wanting systematic Korean language learning."}
           </p>
         </button>
       </div>
 
       <div className="text-center mt-8">
         <button
-          className={`px-6 py-3 bg-teal-600 text-white rounded-lg font-medium ${!learningType ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium ${!learningType ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={!learningType}
           onClick={goToNextStep}
         >
-          다음 단계
+          {t("online.nextStep") || "Next Step"}
         </button>
       </div>
     </div>
@@ -280,17 +282,17 @@ const OnlineMatchingScreen = () => {
   const renderPathChoiceStep = () => (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold text-gray-800 mb-6">
-        매칭 방법을 선택하세요
+        {t("online.selectMatchingMethod") || "Select a matching method"}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <button
-          className={`p-6 rounded-xl border-2 ${pathChoice === "teacher" ? "border-teal-600 bg-teal-50" : "border-gray-200"} hover:border-teal-600 hover:bg-teal-50 transition duration-200`}
+          className={`p-6 rounded-xl border-2 ${pathChoice === "teacher" ? "border-purple-600 bg-purple-50" : "border-gray-200"} hover:border-purple-600 hover:bg-purple-50 transition duration-200`}
           onClick={() => setPathChoice("teacher")}
         >
           <div className="flex items-center mb-4">
-            <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
               <svg
-                className="w-6 h-6 text-teal-600"
+                className="w-6 h-6 text-purple-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -305,23 +307,23 @@ const OnlineMatchingScreen = () => {
               </svg>
             </div>
             <h3 className="text-lg font-medium text-gray-800">
-              선생님 먼저 선택하기
+              {t("online.teacherFirst") || "Select Teacher First"}
             </h3>
           </div>
           <p className="text-gray-600">
-            선생님의 프로필, 전문 분야, 리뷰를 확인한 후 선택합니다. 그 다음
-            선생님과 함께 배울 콘텐츠를 선택합니다.
+            {t("online.teacherFirstDesc") ||
+              "Check teacher profiles, specialties, and reviews before selecting. Then choose content to learn with the teacher."}
           </p>
         </button>
 
         <button
-          className={`p-6 rounded-xl border-2 ${pathChoice === "content" ? "border-teal-600 bg-teal-50" : "border-gray-200"} hover:border-teal-600 hover:bg-teal-50 transition duration-200`}
+          className={`p-6 rounded-xl border-2 ${pathChoice === "content" ? "border-purple-600 bg-purple-50" : "border-gray-200"} hover:border-purple-600 hover:bg-purple-50 transition duration-200`}
           onClick={() => setPathChoice("content")}
         >
           <div className="flex items-center mb-4">
-            <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
               <svg
-                className="w-6 h-6 text-teal-600"
+                className="w-6 h-6 text-purple-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -336,24 +338,23 @@ const OnlineMatchingScreen = () => {
               </svg>
             </div>
             <h3 className="text-lg font-medium text-gray-800">
-              콘텐츠 먼저 선택하기
+              {t("online.contentFirst") || "Select Content First"}
             </h3>
           </div>
           <p className="text-gray-600">
-            배우고 싶은 주제, 상황, 콘텐츠를 먼저 선택합니다. 그 다음 해당
-            콘텐츠를 가르칠 수 있는 선생님을 선택하거나 자동으로 매칭할 수
-            있습니다.
+            {t("online.contentFirstDesc") ||
+              "Choose the topic, situation, or content you want to learn first. Then select a teacher who can teach that content or get automatically matched."}
           </p>
         </button>
       </div>
 
       <div className="text-center mt-8">
         <button
-          className={`px-6 py-3 bg-teal-600 text-white rounded-lg font-medium ${!pathChoice ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium ${!pathChoice ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={!pathChoice}
           onClick={goToNextStep}
         >
-          다음 단계
+          {t("online.nextStep") || "Next Step"}
         </button>
       </div>
     </div>
@@ -362,15 +363,19 @@ const OnlineMatchingScreen = () => {
   // 선생님 선택 화면
   const renderTeacherSelectionStep = () => (
     <div>
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">선생님 선택</h2>
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        {t("online.selectTeacher") || "Select Teacher"}
+      </h2>
 
       {/* 검색 및 필터 */}
       <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
         <div className="relative mb-4">
           <input
             type="text"
-            placeholder="선생님 이름, 전문 분야 검색"
-            className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            placeholder={
+              t("online.searchTeacher") || "Search teacher name, specialty"
+            }
+            className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -391,11 +396,13 @@ const OnlineMatchingScreen = () => {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-sm text-gray-600 mr-2">레벨:</span>
+          <span className="text-sm text-gray-600 mr-2">
+            {t("online.level") || "Level:"}
+          </span>
           {["초급", "중급", "고급"].map((level) => (
             <button
               key={level}
-              className={`px-3 py-1 rounded-full text-xs ${filters.level.includes(level) ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded-full text-xs ${filters.level.includes(level) ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-700"}`}
               onClick={() => toggleFilter("level", level)}
             >
               {level}
@@ -404,11 +411,13 @@ const OnlineMatchingScreen = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="text-sm text-gray-600 mr-2">언어:</span>
+          <span className="text-sm text-gray-600 mr-2">
+            {t("online.language") || "Language:"}
+          </span>
           {["영어", "중국어", "일본어"].map((lang) => (
             <button
               key={lang}
-              className={`px-3 py-1 rounded-full text-xs ${filters.language.includes(lang) ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded-full text-xs ${filters.language.includes(lang) ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-700"}`}
               onClick={() => toggleFilter("language", lang)}
             >
               {lang}
@@ -422,7 +431,7 @@ const OnlineMatchingScreen = () => {
         {filteredTeachers.map((teacher) => (
           <div
             key={teacher.id}
-            className={`p-4 bg-white rounded-xl shadow-sm border-2 ${selectedTeacher?.id === teacher.id ? "border-teal-600" : "border-transparent"} hover:border-teal-600 transition duration-200 cursor-pointer`}
+            className={`p-4 bg-white rounded-xl shadow-sm border-2 ${selectedTeacher?.id === teacher.id ? "border-purple-600" : "border-transparent"} hover:border-purple-600 transition duration-200 cursor-pointer`}
             onClick={() => setSelectedTeacher(teacher)}
           >
             <div className="flex">
@@ -456,7 +465,7 @@ const OnlineMatchingScreen = () => {
                   {teacher.languages.map((lang) => (
                     <span
                       key={lang}
-                      className="bg-teal-100 text-teal-700 text-xs py-0.5 px-2 rounded"
+                      className="bg-purple-100 text-purple-700 text-xs py-0.5 px-2 rounded"
                     >
                       {lang}
                     </span>
@@ -478,7 +487,9 @@ const OnlineMatchingScreen = () => {
                     {teacher.price.toLocaleString()}원/30분
                   </span>
                   {!teacher.available && (
-                    <span className="text-xs text-red-600">현재 예약 불가</span>
+                    <span className="text-xs text-red-600">
+                      {t("online.unavailable") || "Currently Unavailable"}
+                    </span>
                   )}
                 </div>
               </div>
@@ -489,11 +500,11 @@ const OnlineMatchingScreen = () => {
 
       <div className="text-center mt-8">
         <button
-          className={`px-6 py-3 bg-teal-600 text-white rounded-lg font-medium ${!selectedTeacher ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium ${!selectedTeacher ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={!selectedTeacher}
           onClick={goToNextStep}
         >
-          다음 단계
+          {t("online.nextStep") || "Next Step"}
         </button>
       </div>
     </div>
@@ -503,7 +514,7 @@ const OnlineMatchingScreen = () => {
   const renderContentSelectionStep = () => (
     <div>
       <h2 className="text-xl font-semibold text-gray-800 mb-4">
-        학습 콘텐츠 선택
+        {t("online.selectContent") || "Select Learning Content"}
       </h2>
 
       {/* 검색 및 필터 */}
@@ -511,8 +522,10 @@ const OnlineMatchingScreen = () => {
         <div className="relative mb-4">
           <input
             type="text"
-            placeholder="콘텐츠 제목, 내용 검색"
-            className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            placeholder={
+              t("online.searchContent") || "Search content title, description"
+            }
+            className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -533,11 +546,13 @@ const OnlineMatchingScreen = () => {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-sm text-gray-600 mr-2">레벨:</span>
+          <span className="text-sm text-gray-600 mr-2">
+            {t("online.level") || "Level:"}
+          </span>
           {["초급", "중급", "고급"].map((level) => (
             <button
               key={level}
-              className={`px-3 py-1 rounded-full text-xs ${filters.level.includes(level) ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded-full text-xs ${filters.level.includes(level) ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-700"}`}
               onClick={() => toggleFilter("level", level)}
             >
               {level}
@@ -546,11 +561,13 @@ const OnlineMatchingScreen = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="text-sm text-gray-600 mr-2">카테고리:</span>
+          <span className="text-sm text-gray-600 mr-2">
+            {t("online.category") || "Category:"}
+          </span>
           {["일상생활", "실용", "여행", "문화", "시험"].map((category) => (
             <button
               key={category}
-              className={`px-3 py-1 rounded-full text-xs ${filters.category.includes(category) ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded-full text-xs ${filters.category.includes(category) ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-700"}`}
               onClick={() => toggleFilter("category", category)}
             >
               {category}
@@ -564,11 +581,11 @@ const OnlineMatchingScreen = () => {
         {filteredContents.map((content) => (
           <div
             key={content.id}
-            className={`bg-white rounded-xl shadow-sm overflow-hidden border-2 ${selectedContent?.id === content.id ? "border-teal-600" : "border-transparent"} hover:border-teal-600 transition duration-200 cursor-pointer`}
+            className={`bg-white rounded-xl shadow-sm overflow-hidden border-2 ${selectedContent?.id === content.id ? "border-purple-600" : "border-transparent"} hover:border-purple-600 transition duration-200 cursor-pointer`}
             onClick={() => setSelectedContent(content)}
           >
             <div className="h-32 bg-gray-300 relative">
-              <div className="absolute bottom-0 left-0 bg-teal-600 text-white px-2 py-1 text-xs rounded-tr-lg">
+              <div className="absolute bottom-0 left-0 bg-gradient-to-r from-purple-600 to-pink-500 text-white px-2 py-1 text-xs rounded-tr-lg">
                 {content.level}
               </div>
               <div className="absolute bottom-0 right-0 bg-gray-800 bg-opacity-70 text-white px-2 py-1 text-xs">
@@ -612,7 +629,7 @@ const OnlineMatchingScreen = () => {
                     {content.rating}
                   </span>
                 </div>
-                <span className="px-2 py-0.5 bg-teal-100 text-teal-700 rounded-full text-xs">
+                <span className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs">
                   {content.category}
                 </span>
               </div>
@@ -623,11 +640,11 @@ const OnlineMatchingScreen = () => {
 
       <div className="text-center mt-8">
         <button
-          className={`px-6 py-3 bg-teal-600 text-white rounded-lg font-medium ${!selectedContent ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium ${!selectedContent ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={!selectedContent}
           onClick={() => router.push("/schedule")}
         >
-          예약하기
+          {t("online.book") || "Book"}
         </button>
       </div>
     </div>
@@ -656,7 +673,7 @@ const OnlineMatchingScreen = () => {
               </svg>
             </button>
             <div className="text-xl font-bold text-gray-800">
-              온라인 학습 매칭
+              {t("online.title") || "Online Learning Matching"}
             </div>
           </div>
           <div></div>
@@ -668,51 +685,51 @@ const OnlineMatchingScreen = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-600"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-600"}`}
             >
               1
             </div>
             <div
-              className={`flex-grow h-1 mx-2 ${step >= 2 ? "bg-teal-600" : "bg-gray-200"}`}
+              className={`flex-grow h-1 mx-2 ${step >= 2 ? "bg-gradient-to-r from-purple-600 to-pink-500" : "bg-gray-200"}`}
             ></div>
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-600"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-600"}`}
             >
               2
             </div>
             <div
-              className={`flex-grow h-1 mx-2 ${step >= 3 ? "bg-teal-600" : "bg-gray-200"}`}
+              className={`flex-grow h-1 mx-2 ${step >= 3 ? "bg-gradient-to-r from-purple-600 to-pink-500" : "bg-gray-200"}`}
             ></div>
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-600"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-600"}`}
             >
               3
             </div>
             <div
-              className={`flex-grow h-1 mx-2 ${step >= 4 ? "bg-teal-600" : "bg-gray-200"}`}
+              className={`flex-grow h-1 mx-2 ${step >= 4 ? "bg-gradient-to-r from-purple-600 to-pink-500" : "bg-gray-200"}`}
             ></div>
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 4 ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-600"}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 4 ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white" : "bg-gray-200 text-gray-600"}`}
             >
               4
             </div>
           </div>
           <div className="flex text-xs text-gray-500 mt-1 justify-between">
-            <span className={step >= 1 ? "text-teal-600 font-medium" : ""}>
-              학습 유형
+            <span className={step >= 1 ? "text-purple-600 font-medium" : ""}>
+              {t("online.step1") || "Learning Type"}
             </span>
-            <span className={step >= 2 ? "text-teal-600 font-medium" : ""}>
-              매칭 방법
+            <span className={step >= 2 ? "text-purple-600 font-medium" : ""}>
+              {t("online.step2") || "Matching Method"}
             </span>
-            <span className={step >= 3 ? "text-teal-600 font-medium" : ""}>
+            <span className={step >= 3 ? "text-purple-600 font-medium" : ""}>
               {pathChoice === "teacher"
-                ? "선생님 선택"
+                ? t("online.selectTeacher") || "Select Teacher"
                 : pathChoice === "content"
-                  ? "콘텐츠 선택"
-                  : "선택"}
+                  ? t("online.selectContent") || "Select Content"
+                  : t("online.step3") || "Selection"}
             </span>
-            <span className={step >= 4 ? "text-teal-600 font-medium" : ""}>
-              예약
+            <span className={step >= 4 ? "text-purple-600 font-medium" : ""}>
+              {t("online.step4") || "Booking"}
             </span>
           </div>
         </div>

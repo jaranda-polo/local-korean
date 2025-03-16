@@ -2,15 +2,20 @@
 
 import React from "react";
 import BottomNavigation from "@/components/common/BottomNavigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProfileScreen = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-50">
       {/* 헤더 */}
       <header className="sticky top-0 z-10 bg-white shadow-sm w-full">
         <div className="w-full px-4 py-3">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-800">프로필</h1>
+            <h1 className="text-xl font-bold text-gray-800">
+              {t("profile.title") || "Profile"}
+            </h1>
             <div></div>
           </div>
         </div>
@@ -27,18 +32,18 @@ const ProfileScreen = () => {
             </h2>
             <p className="text-gray-600 mb-3">미국 · 초급 수준</p>
             <div className="flex flex-wrap gap-2 mb-4 justify-center">
-              <span className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">
+              <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
                 여행
               </span>
-              <span className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">
+              <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
                 일상 생활
               </span>
-              <span className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">
+              <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
                 K-Pop
               </span>
             </div>
-            <button className="w-full py-2 border border-teal-600 text-teal-600 rounded-lg font-medium">
-              프로필 편집
+            <button className="w-full py-2 border border-purple-600 text-purple-600 rounded-lg font-medium">
+              {t("profile.editProfile") || "Edit Profile"}
             </button>
           </div>
         </div>
@@ -46,48 +51,48 @@ const ProfileScreen = () => {
         {/* 학습 현황 */}
         <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-4 sm:mb-6 w-full">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            학습 현황
+            {t("profile.learningStatus") || "Learning Status"}
           </h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base text-gray-600">
-                  총 수업 시간
+                  {t("profile.totalClassTime") || "Total Class Time"}
                 </span>
                 <span className="font-medium text-sm sm:text-base text-gray-800">
                   12시간 30분
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-teal-600 h-2.5 rounded-full w-1/2"></div>
+                <div className="bg-gradient-to-r from-purple-600 to-pink-500 h-2.5 rounded-full w-1/2"></div>
               </div>
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base text-gray-600">
-                  완료한 수업
+                  {t("profile.completedClasses") || "Completed Classes"}
                 </span>
                 <span className="font-medium text-sm sm:text-base text-gray-800">
                   8 / 20
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-teal-600 h-2.5 rounded-full w-2/5"></div>
+                <div className="bg-gradient-to-r from-purple-600 to-pink-500 h-2.5 rounded-full w-2/5"></div>
               </div>
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base text-gray-600">
-                  저장한 단어
+                  {t("profile.savedWords") || "Saved Words"}
                 </span>
                 <span className="font-medium text-sm sm:text-base text-gray-800">
                   47개
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-teal-600 h-2.5 rounded-full w-3/5"></div>
+                <div className="bg-gradient-to-r from-purple-600 to-pink-500 h-2.5 rounded-full w-3/5"></div>
               </div>
             </div>
           </div>
@@ -96,8 +101,12 @@ const ProfileScreen = () => {
         {/* 저장된 단어 */}
         <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-4 sm:mb-6 w-full">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-800">저장된 단어</h3>
-            <button className="text-sm text-teal-600">모두 보기</button>
+            <h3 className="text-lg font-semibold text-gray-800">
+              {t("profile.savedWords") || "Saved Words"}
+            </h3>
+            <button className="text-sm text-purple-600">
+              {t("profile.viewAll") || "View All"}
+            </button>
           </div>
           <div className="space-y-2 sm:space-y-3 w-full">
             <div className="flex justify-between items-center p-2 sm:p-3 bg-gray-50 rounded-lg">
@@ -195,7 +204,7 @@ const ProfileScreen = () => {
                   ></path>
                 </svg>
                 <span className="text-sm sm:text-base text-gray-800">
-                  결제 및 구독 정보
+                  {t("profile.paymentSubscription") || "Payment & Subscription"}
                 </span>
               </div>
               <svg
@@ -230,7 +239,7 @@ const ProfileScreen = () => {
                   ></path>
                 </svg>
                 <span className="text-sm sm:text-base text-gray-800">
-                  알림 설정
+                  {t("profile.notificationSettings") || "Notification Settings"}
                 </span>
               </div>
               <svg
@@ -265,7 +274,7 @@ const ProfileScreen = () => {
                   ></path>
                 </svg>
                 <span className="text-sm sm:text-base text-gray-800">
-                  도움말 및 지원
+                  {t("profile.helpSupport") || "Help & Support"}
                 </span>
               </div>
               <svg
@@ -300,7 +309,7 @@ const ProfileScreen = () => {
                   ></path>
                 </svg>
                 <span className="text-sm sm:text-base text-gray-800">
-                  로그아웃
+                  {t("profile.logout") || "Logout"}
                 </span>
               </div>
               <svg

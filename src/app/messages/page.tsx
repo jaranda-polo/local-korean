@@ -2,15 +2,19 @@
 
 import React from "react";
 import BottomNavigation from "@/components/common/BottomNavigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MessagesScreen = () => {
+  const { t } = useLanguage();
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* 헤더 */}
       <header className="sticky top-0 z-10 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-800">메시지</h1>
+            <h1 className="text-xl font-bold text-gray-800">
+              {t("messages.title") || "Messages"}
+            </h1>
             <div></div>
           </div>
         </div>
@@ -20,11 +24,15 @@ const MessagesScreen = () => {
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex">
-            <button className="py-3 px-4 border-b-2 border-teal-600 text-teal-600 font-medium">
-              모든 대화
+            <button className="py-3 px-4 border-b-2 border-purple-600 text-purple-600 font-medium">
+              {t("messages.allConversations") || "All Conversations"}
             </button>
-            <button className="py-3 px-4 text-gray-500">선생님</button>
-            <button className="py-3 px-4 text-gray-500">시스템 알림</button>
+            <button className="py-3 px-4 text-gray-500">
+              {t("messages.teachers") || "Teachers"}
+            </button>
+            <button className="py-3 px-4 text-gray-500">
+              {t("messages.systemNotifications") || "System Notifications"}
+            </button>
           </div>
         </div>
       </div>
@@ -34,10 +42,10 @@ const MessagesScreen = () => {
         {/* 메시지 목록 */}
         <div className="space-y-3">
           {/* 읽지 않은 메시지 있는 대화 */}
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-teal-600">
+          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-purple-600">
             <div className="flex">
               <div className="w-12 h-12 rounded-full bg-gray-300 mr-3 flex-shrink-0 relative">
-                <div className="absolute -top-1 -right-1 w-5 h-5 bg-teal-600 rounded-full text-white flex items-center justify-center text-xs">
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full text-white flex items-center justify-center text-xs">
                   2
                 </div>
               </div>
@@ -52,8 +60,8 @@ const MessagesScreen = () => {
                   다룰 예정입니다.
                 </p>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full">
-                    오늘 수업
+                  <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+                    {t("messages.todayClass") || "Today's Class"}
                   </span>
                 </div>
               </div>
@@ -75,7 +83,7 @@ const MessagesScreen = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
-                    내일 수업
+                    {t("messages.tomorrowClass") || "Tomorrow's Class"}
                   </span>
                 </div>
               </div>
@@ -103,7 +111,10 @@ const MessagesScreen = () => {
               </div>
               <div className="flex-grow">
                 <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-gray-800">시스템 알림</h3>
+                  <h3 className="font-medium text-gray-800">
+                    {t("messages.systemNotifications") ||
+                      "System Notifications"}
+                  </h3>
                   <span className="text-xs text-gray-500">3일 전</span>
                 </div>
                 <p className="text-sm text-gray-600 line-clamp-2">
@@ -129,7 +140,7 @@ const MessagesScreen = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                    지난 수업
+                    {t("messages.pastClass") || "Past Class"}
                   </span>
                 </div>
               </div>
@@ -152,9 +163,11 @@ const MessagesScreen = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">
-                    오프라인 동행
+                    {t("messages.offlineGuide") || "Offline Guide"}
                   </span>
-                  <span className="text-xs text-teal-600">첨부파일 1개</span>
+                  <span className="text-xs text-purple-600">
+                    {t("messages.attachment") || "Attachment"} 1
+                  </span>
                 </div>
               </div>
             </div>

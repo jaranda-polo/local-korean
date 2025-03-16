@@ -3,15 +3,20 @@
 import React from "react";
 import BottomNavigation from "@/components/common/BottomNavigation";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ScheduleScreen = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-50">
       {/* 헤더 */}
       <header className="sticky top-0 z-10 bg-white shadow-sm w-full">
         <div className="w-full px-4 py-3">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-800">내 일정</h1>
+            <h1 className="text-xl font-bold text-gray-800">
+              {t("schedule.title") || "My Schedule"}
+            </h1>
             <div></div>
           </div>
         </div>
@@ -21,10 +26,12 @@ const ScheduleScreen = () => {
       <div className="bg-white border-b border-gray-200 w-full">
         <div className="w-full px-4">
           <div className="flex">
-            <button className="py-3 px-4 border-b-2 border-teal-600 text-teal-600 font-medium">
-              일정
+            <button className="py-3 px-4 border-b-2 border-purple-600 text-purple-600 font-medium">
+              {t("schedule.schedule") || "Schedule"}
             </button>
-            <button className="py-3 px-4 text-gray-500">지난 수업</button>
+            <button className="py-3 px-4 text-gray-500">
+              {t("schedule.pastClasses") || "Past Classes"}
+            </button>
           </div>
         </div>
       </div>
@@ -110,17 +117,17 @@ const ScheduleScreen = () => {
             <div className="text-center py-2 text-gray-700 text-sm">15</div>
           </div>
           <div className="grid grid-cols-7 gap-1 mb-1">
-            <div className="text-center py-2 text-white text-sm bg-teal-600 rounded-full">
+            <div className="text-center py-2 text-white text-sm bg-gradient-to-r from-purple-600 to-pink-500 rounded-full">
               16
             </div>
             <div className="text-center py-2 text-gray-700 text-sm relative">
               17
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-teal-600 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full"></div>
             </div>
             <div className="text-center py-2 text-gray-700 text-sm">18</div>
             <div className="text-center py-2 text-gray-700 text-sm relative">
               19
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-teal-600 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full"></div>
             </div>
             <div className="text-center py-2 text-gray-700 text-sm">20</div>
             <div className="text-center py-2 text-gray-700 text-sm">21</div>
@@ -132,19 +139,19 @@ const ScheduleScreen = () => {
       {/* 메인 콘텐츠 */}
       <main className="flex-grow w-full px-4 py-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          오늘 (3월 16일)
+          {t("schedule.today") || "Today"} (March 16)
         </h2>
 
         {/* 오늘 일정 */}
-        <div className="bg-teal-50 border border-teal-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 w-full">
+        <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 w-full">
           <div className="flex mb-2">
-            <div className="w-2 h-full bg-teal-600 rounded-full mr-3"></div>
+            <div className="w-2 h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full mr-3"></div>
             <div className="flex-grow">
               <div className="flex items-center justify-between mb-1">
                 <h3 className="font-medium text-gray-800">
                   서울에서 집 구하기
                 </h3>
-                <span className="text-xs sm:text-sm text-teal-700">
+                <span className="text-xs sm:text-sm text-purple-700">
                   16:00 - 16:30
                 </span>
               </div>
@@ -152,35 +159,35 @@ const ScheduleScreen = () => {
                 김민지 선생님과 온라인 수업
               </p>
               <div className="flex items-center">
-                <span className="mr-3 px-2 py-0.5 bg-teal-100 text-teal-700 rounded text-xs">
-                  온라인
+                <span className="mr-3 px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">
+                  {t("schedule.online") || "Online"}
                 </span>
                 <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
-                  초급
+                  {t("schedule.beginner") || "Beginner"}
                 </span>
               </div>
             </div>
           </div>
-          <div className="mt-3 pt-3 border-t border-teal-200 flex justify-end space-x-2">
+          <div className="mt-3 pt-3 border-t border-purple-200 flex justify-end space-x-2">
             <button className="px-3 py-1.5 border border-gray-300 text-gray-600 rounded text-sm">
-              취소
+              {t("schedule.cancel") || "Cancel"}
             </button>
             <Link
               href="/class"
-              className="px-3 py-1.5 bg-teal-600 text-white rounded text-sm"
+              className="px-3 py-1.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded text-sm"
             >
-              입장하기
+              {t("schedule.join") || "Join"}
             </Link>
           </div>
         </div>
 
         {/* 내일 일정 */}
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          내일 (3월 17일)
+          {t("schedule.tomorrow") || "Tomorrow"} (March 17)
         </h2>
         <div className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 w-full">
           <div className="flex mb-2">
-            <div className="w-2 h-full bg-teal-600 rounded-full mr-3"></div>
+            <div className="w-2 h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full mr-3"></div>
             <div className="flex-grow">
               <div className="flex items-center justify-between mb-1">
                 <h3 className="font-medium text-gray-800">카페에서 주문하기</h3>
@@ -192,11 +199,11 @@ const ScheduleScreen = () => {
                 박준호 선생님과 온라인 수업
               </p>
               <div className="flex items-center">
-                <span className="mr-3 px-2 py-0.5 bg-teal-100 text-teal-700 rounded text-xs">
-                  온라인
+                <span className="mr-3 px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">
+                  {t("schedule.online") || "Online"}
                 </span>
                 <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
-                  초급
+                  {t("schedule.beginner") || "Beginner"}
                 </span>
               </div>
             </div>
@@ -222,7 +229,7 @@ const ScheduleScreen = () => {
               </p>
               <div className="flex items-center">
                 <span className="mr-3 px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs">
-                  오프라인
+                  {t("schedule.offline") || "Offline"}
                 </span>
                 <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-xs">
                   종로구
@@ -232,10 +239,10 @@ const ScheduleScreen = () => {
           </div>
           <div className="mt-3 pt-3 border-t border-gray-200 flex justify-end space-x-2">
             <button className="px-3 py-1.5 border border-gray-300 text-gray-600 rounded text-sm">
-              취소
+              {t("schedule.cancel") || "Cancel"}
             </button>
             <button className="px-3 py-1.5 bg-gray-800 text-white rounded text-sm">
-              상세정보
+              {t("schedule.details") || "Details"}
             </button>
           </div>
         </div>
