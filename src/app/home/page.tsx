@@ -1,4 +1,13 @@
-/* 헤더 */}
+"use client";
+
+import React from "react";
+import BottomNavigation from "@/components/common/BottomNavigation";
+import Link from "next/link";
+
+const HomePage = () => {
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* 헤더 */}
       <header className="sticky top-0 z-10 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center">
