@@ -105,10 +105,10 @@ const DiscoverScreen = () => {
   const [activeTab, setActiveTab] = useState("all");
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 relative pb-16">
+    <div className="flex flex-col min-h-screen bg-gray-50 relative pb-16 max-w-[390px] mx-auto">
       {/* 헤더 */}
-      <header className="sticky top-0 z-10 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-3">
+      <header className="sticky top-0 z-10 bg-white shadow-sm w-full">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold text-gray-800">
               {t("discover.title") || "Discover"}
@@ -160,8 +160,8 @@ const DiscoverScreen = () => {
       </header>
 
       {/* Category Tabs */}
-      <div className="bg-white border-b border-gray-200 sticky top-16 z-10">
-        <div className="container mx-auto px-4">
+      <div className="bg-white border-b border-gray-200 sticky top-16 z-10 w-full">
+        <div className="px-4">
           <div className="flex overflow-x-auto hide-scrollbar">
             <button
               className={`py-3 px-4 whitespace-nowrap ${activeTab === "all" ? "text-purple-600 border-b-2 border-purple-600 font-medium" : "text-gray-500"}`}
@@ -198,7 +198,7 @@ const DiscoverScreen = () => {
       </div>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="flex-grow px-4 py-6 w-full">
         {/* Daily Korean Tip */}
         <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 mb-6 border border-purple-100">
           <div className="flex items-start">
@@ -483,7 +483,7 @@ const DiscoverScreen = () => {
       </main>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 z-20">
+      <div className="fixed bottom-0 left-0 right-0 z-20 max-w-[390px] mx-auto">
         <BottomNavigation />
       </div>
     </div>

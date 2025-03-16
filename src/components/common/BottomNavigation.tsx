@@ -16,8 +16,8 @@ const BottomNavigation: React.FC = () => {
   };
 
   return (
-    <nav className="sticky bottom-0 z-10 bg-white border-t border-gray-200">
-      <div className="container mx-auto px-4">
+    <nav className="sticky bottom-0 z-10 bg-white border-t border-gray-200 w-full">
+      <div className="px-4">
         <div className="flex justify-between">
           <Link
             href="/home"
