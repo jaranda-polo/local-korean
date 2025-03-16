@@ -5,10 +5,10 @@ import BottomNavigation from "@/components/common/BottomNavigation";
 
 const SearchScreen = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen w-full bg-gray-50">
       {/* 헤더 */}
-      <header className="sticky top-0 z-10 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-3">
+      <header className="sticky top-0 z-10 bg-white shadow-sm w-full">
+        <div className="w-full px-4 py-3">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold text-gray-800">검색</h1>
             <div></div>
@@ -17,9 +17,9 @@ const SearchScreen = () => {
       </header>
 
       {/* 메인 콘텐츠 */}
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="flex-grow w-full px-4 py-6">
         {/* 최근 검색어 */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6 w-full">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-semibold text-gray-800">
               최근 검색어
@@ -88,11 +88,11 @@ const SearchScreen = () => {
         </div>
 
         {/* 카테고리 필터 */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6 w-full">
           <h2 className="text-base font-semibold text-gray-800 mb-3">
             카테고리
           </h2>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2 w-full">
             <button className="bg-teal-600 text-white py-2 px-3 rounded-lg text-sm font-medium">
               전체
             </button>
@@ -106,11 +106,11 @@ const SearchScreen = () => {
         </div>
 
         {/* 추천 검색어 */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6 w-full">
           <h2 className="text-base font-semibold text-gray-800 mb-3">
             인기 검색어
           </h2>
-          <div className="bg-white rounded-xl shadow-sm p-4">
+          <div className="bg-white rounded-xl shadow-sm p-3 sm:p-4 w-full">
             <ol className="space-y-2">
               <li className="flex items-center">
                 <span className="w-5 h-5 bg-teal-600 text-white rounded flex items-center justify-center text-xs mr-3">
@@ -147,13 +147,13 @@ const SearchScreen = () => {
         </div>
 
         {/* 추천 탐색 */}
-        <div>
+        <div className="w-full">
           <h2 className="text-base font-semibold text-gray-800 mb-3">
             추천 탐색
           </h2>
-          <div className="space-y-4">
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <div className="h-40 bg-gray-300 relative">
+          <div className="space-y-4 w-full">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden w-full">
+              <div className="h-40 bg-gray-300 relative w-full">
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <h3 className="text-white font-medium">
                     서울 생활 정착 가이드
@@ -161,8 +161,8 @@ const SearchScreen = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <div className="h-40 bg-gray-300 relative">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden w-full">
+              <div className="h-40 bg-gray-300 relative w-full">
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <h3 className="text-white font-medium">
                     K-Pop 팬을 위한 한국어
@@ -170,8 +170,8 @@ const SearchScreen = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <div className="h-40 bg-gray-300 relative">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden w-full">
+              <div className="h-40 bg-gray-300 relative w-full">
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <h3 className="text-white font-medium">한국 문화와 예절</h3>
                 </div>
