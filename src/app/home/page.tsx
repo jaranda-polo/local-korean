@@ -6,16 +6,18 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* 헤더 */}
-      <header className="sticky top-0 z-10 bg-white shadow-sm">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-purple-50 to-white">
+      {/* Header */}
+      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-teal-600">로컬한국어</div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">
+              LocalKorean
+            </div>
           </div>
           <div className="flex items-center space-x-4">
             <button
-              className="p-2 rounded-full text-gray-500 hover:bg-gray-100"
+              className="p-2 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200"
               onClick={() => window.open("/", "_blank")}
             >
               <svg
@@ -33,7 +35,7 @@ const HomePage = () => {
                 ></path>
               </svg>
             </button>
-            <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100">
+            <button className="p-2 rounded-full text-gray-500 hover:bg-purple-100 transition-colors duration-200">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -49,83 +51,83 @@ const HomePage = () => {
                 ></path>
               </svg>
             </button>
-            <div className="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md">
               JD
             </div>
           </div>
         </div>
       </header>
 
-      {/* 메인 콘텐츠 */}
+      {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-6">
-        {/* 환영 메시지 */}
+        {/* Welcome Message */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">
-            안녕하세요, John님!
-          </h1>
-          <p className="text-gray-600">오늘은 어떤 한국어를 배워볼까요?</p>
+          <h1 className="text-2xl font-bold text-gray-800">Hello, John!</h1>
+          <p className="text-gray-600">What would you like to learn today?</p>
         </div>
 
-        {/* 예정된 수업 */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-8">
+        {/* Upcoming Classes */}
+        <div className="bg-white rounded-xl shadow-sm p-5 mb-8 border border-purple-100">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800">
-              다가오는 수업
+              Upcoming Classes
             </h2>
-            <button className="text-sm text-teal-600 font-medium">
-              모두 보기
+            <button className="text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text hover:opacity-80 transition-opacity">
+              View All
             </button>
           </div>
 
-          <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 mb-2">
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 mb-3 border border-purple-100">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-teal-200 flex items-center justify-center mr-3">
-                  <span className="text-teal-700 font-medium">오늘</span>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center mr-3 shadow-sm">
+                  <span className="text-purple-700 font-medium">Today</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800">
-                    서울에서 집 구하기
+                    Finding an Apartment in Seoul
                   </h3>
                   <p className="text-sm text-gray-600">
-                    김민지 선생님과 16:00 (30분 후)
+                    With Minji Kim • 16:00 (30 min left)
                   </p>
                 </div>
               </div>
               <Link
                 href="/class"
-                className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium"
+                className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                입장하기
+                Join Now
               </Link>
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded-lg p-4">
+          <div className="bg-white rounded-lg p-4 border border-gray-100 hover:border-purple-100 transition-colors duration-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                  <span className="text-gray-700 font-medium">내일</span>
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                  <span className="text-gray-700 font-medium">Tomorrow</span>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-800">
-                    카페에서 주문하기
+                    Ordering at a Cafe
                   </h3>
-                  <p className="text-sm text-gray-600">박준호 선생님과 14:30</p>
+                  <p className="text-sm text-gray-600">
+                    With Junho Park • 14:30
+                  </p>
                 </div>
               </div>
-              <button className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm font-medium">
-                상세보기
+              <button className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+                Details
               </button>
             </div>
           </div>
         </div>
 
-        {/* 빠른 액션 버튼 */}
+        {/* Quick Action Buttons */}
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Link
             href="/match/online"
-            className="bg-teal-600 text-white rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center hover:shadow-md transition-shadow duration-200"
           >
             <svg
               className="w-8 h-8 mb-2"
@@ -141,11 +143,11 @@ const HomePage = () => {
                 d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
               ></path>
             </svg>
-            <span className="font-medium">온라인 학습 시작하기</span>
+            <span className="font-medium">Start Online Learning</span>
           </Link>
           <Link
             href="/match/offline"
-            className="bg-white border-2 border-teal-500 text-teal-600 rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center"
+            className="bg-white border-2 border-purple-200 text-purple-600 rounded-xl shadow-sm p-6 text-center flex flex-col items-center justify-center hover:border-purple-300 hover:shadow-md transition-all duration-200"
           >
             <svg
               className="w-8 h-8 mb-2"
@@ -167,14 +169,56 @@ const HomePage = () => {
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               ></path>
             </svg>
-            <span className="font-medium">오프라인 동행 신청하기</span>
+            <span className="font-medium">Request In-Person Guide</span>
           </Link>
         </div>
 
-        {/* 추천 콘텐츠와 인기 선생님 섹션 생략 - 길이 제한으로 인해 */}
+        {/* Recommended Content Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-800">
+              Recommended for You
+            </h2>
+            <button className="text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text hover:opacity-80 transition-opacity">
+              View All
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-purple-100 hover:shadow-md transition-shadow duration-200">
+              <div className="h-32 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
+                <span className="text-purple-700 font-medium">
+                  K-pop Vocabulary
+                </span>
+              </div>
+              <div className="p-4">
+                <h3 className="font-medium text-gray-800 mb-1">
+                  Learn K-pop Terminology
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Essential words for K-pop fans
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-purple-100 hover:shadow-md transition-shadow duration-200">
+              <div className="h-32 bg-gradient-to-r from-purple-200 to-pink-200 flex items-center justify-center">
+                <span className="text-purple-700 font-medium">
+                  Daily Conversations
+                </span>
+              </div>
+              <div className="p-4">
+                <h3 className="font-medium text-gray-800 mb-1">
+                  Everyday Korean Phrases
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Useful expressions for daily life
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
 
-      {/* 하단 네비게이션 */}
+      {/* Bottom Navigation */}
       <BottomNavigation />
     </div>
   );
